@@ -25,6 +25,9 @@ param dataCollectionEndpoints_IaaSVMCollectionEndpoint_name string
 param smartdetectoralertrules_failure_anomalies_azurelinuxappzz777_webapp_name string
 param actiongroups_application_insights_smart_detection_externalid string
 
+// Resources created 2026-01-26
+// prep for Learning Path Deploy and configure Azure Monitor
+
 resource actionGroups_NotifyCPU_name_resource 'microsoft.insights/actionGroups@2024-10-01-preview' = {
   name: actionGroups_NotifyCPU_name
   location: 'Global'
@@ -83,7 +86,7 @@ resource networkSecurityGroups_WS_VM1_nsg_name_resource 'Microsoft.Network/netwo
   name: networkSecurityGroups_WS_VM1_nsg_name
   location: 'eastus'
   tags: {
-    purpose: 'b'
+    purpose: 'Deploy and configure Azure Monitor'
   }
   properties: {
     securityRules: [
@@ -153,7 +156,7 @@ resource publicIPAddresses_WS_VM1_ip_name_resource 'Microsoft.Network/publicIPAd
   name: publicIPAddresses_WS_VM1_ip_name
   location: 'eastus'
   tags: {
-    purpose: 'b'
+    purpose: 'Deploy and configure Azure Monitor'
   }
   sku: {
     name: 'Standard'
@@ -175,7 +178,7 @@ resource virtualNetworks_vnet_eastus_name_resource 'Microsoft.Network/virtualNet
   name: virtualNetworks_vnet_eastus_name
   location: 'eastus'
   tags: {
-    purpose: 'b'
+    purpose: 'Deploy and configure Azure Monitor'
   }
   properties: {
     addressSpace: {
@@ -433,7 +436,7 @@ resource virtualMachines_WS_VM1_name_resource 'Microsoft.Compute/virtualMachines
   name: virtualMachines_WS_VM1_name
   location: 'eastus'
   tags: {
-    purpose: 'b'
+    purpose: 'Deploy and configure Azure Monitor'
   }
   identity: {
     type: 'SystemAssigned'
@@ -11312,7 +11315,7 @@ resource networkInterfaces_ws_vm125_name_resource 'Microsoft.Network/networkInte
   name: networkInterfaces_ws_vm125_name
   location: 'eastus'
   tags: {
-    purpose: 'b'
+    purpose: 'Deploy and configure Azure Monitor'
   }
   kind: 'Regular'
   properties: {
