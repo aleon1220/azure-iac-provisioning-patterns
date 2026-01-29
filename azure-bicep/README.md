@@ -27,7 +27,7 @@ architecture-beta
     service VM2(logos:linux-tux)[Linux VM] in compute
     service EXT(logos:azure)[VM Extension] in compute
 
-%% Group: Network Resources
+    %% Group: Network Resources
     group network(cloud)[Network Resources]
     service VNet1(logos:azure)[VNet East US] in network
     service VNet2(logos:azure)[VNet East US 1] in network
@@ -38,16 +38,17 @@ architecture-beta
 
     %% Group: Web & Database
     group appservices(logos:azure)[Web and Database]
-    service AP1(logos:azure)[App Service Plan 1] in appservices
-    service AP2(logos:azure)[App Service Plan 2] in appservices
-    service WEB1(logos:azure)[Web App 1] in appservices
-    service WEB2(logos:azure)[Web App 2] in appservices
-    service SQL(logos:azure-sql-database)[SQL Server] in appservices
+      service AP1(logos:azure)[App Service Plan 1] in appservices
+      service AP2(logos:azure)[App Service Plan 2] in appservices
+      service WEB1(logos:azure)[Web App 1] in appservices
+      service WEB2(logos:azure)[Web App 2] in appservices
+      service SQL(logos:azure-sql-database)[SQL Server] in appservices
 
     %% Group: Alerting
     group alerting(logos:azure)[Alert Management]
-    service SDA(logos:azure)[Smart Detector] in alerting
-    service MA(logos:azure)[Metric Alert] in alerting
+      service SDA(logos:azure)[Smart Detector] in alerting
+      service MA(logos:azure)[Metric Alert] in alerting
+      service PP(logos:azure:process-explorer)[Metric Polling process] in alerting
 
     %% Relationships
     %% Network & Compute
@@ -70,8 +71,7 @@ architecture-beta
     WEB2:R -- L:appInsight
 
     %% Alerting Connections
-    SDA:R -- L:actionGroup
-    MA:R -- L:actionGroup
+    MA:L -- R:actionGroup
 ```
 
 ## mermaid Graph diagram
