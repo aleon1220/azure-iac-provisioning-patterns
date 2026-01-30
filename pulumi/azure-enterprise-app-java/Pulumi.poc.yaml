@@ -1,0 +1,3 @@
+config:
+  azure-enterprise-app-java:resourceGroupName: anz-devops-sre-platform-engineering-research-dev
+  azure-native:location: westus
