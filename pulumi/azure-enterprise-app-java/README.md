@@ -16,3 +16,9 @@ a VM and SQL server DB 2022 that runs a java app for process automation
     .sku("22_04-lts")
     .version("latest")
 ```
+
+# Project Structure
+the stacks of the project contain
+
+- `/networking-resource-group` All the vnet details
+- `services` contains the app resources itself
