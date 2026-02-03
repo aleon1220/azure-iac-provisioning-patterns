@@ -55,7 +55,8 @@ public class App {
             ctx.export("output vnet name", vnet.name());
             ctx.export("output Subnet Name", subnet.name());
             ctx.export("output Subnet Address Prefix", subnet.addressPrefix());
-            ctx.export("output NIC Network Interface Card", nic.id());
+            ctx.export("output NIC Network Interface Card name", nic.name());
+            ctx.export("nic", nic.id());
         });
     }
 }
