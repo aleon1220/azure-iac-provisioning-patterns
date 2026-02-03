@@ -1,14 +1,9 @@
 package myproject;
 
-import java.util.List;
-
 import com.pulumi.Pulumi;
 import com.pulumi.Context;
 import com.pulumi.core.Output;
 import com.pulumi.resources.StackReference;
-
-import com.pulumi.azurenative.resources.ResourceGroup;
-import com.pulumi.azurenative.resources.ResourceGroupArgs;
 
 import com.pulumi.azurenative.compute.VirtualMachine;
 import com.pulumi.azurenative.compute.VirtualMachineArgs;
@@ -16,18 +11,11 @@ import com.pulumi.azurenative.compute.inputs.HardwareProfileArgs;
 import com.pulumi.azurenative.compute.inputs.NetworkProfileArgs;
 import com.pulumi.azurenative.compute.inputs.OSProfileArgs;
 import com.pulumi.azurenative.compute.inputs.LinuxConfigurationArgs;
-import com.pulumi.azurenative.compute.inputs.LinuxPatchSettingsArgs;
 import com.pulumi.azurenative.compute.inputs.StorageProfileArgs;
 import com.pulumi.azurenative.compute.inputs.ImageReferenceArgs;
 import com.pulumi.azurenative.compute.inputs.OSDiskArgs;
 import com.pulumi.azurenative.compute.inputs.NetworkInterfaceReferenceArgs;
 import com.pulumi.azurenative.compute.inputs.ManagedDiskParametersArgs;
-
-import com.pulumi.azurenative.sql.Server;
-import com.pulumi.azurenative.sql.ServerArgs;
-import com.pulumi.azurenative.sql.Database;
-import com.pulumi.azurenative.sql.DatabaseArgs;
-import com.pulumi.azurenative.sql.inputs.SkuArgs;
 
 public class App {
         public static void main(String[] args) {

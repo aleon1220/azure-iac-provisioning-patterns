@@ -1,8 +1,0 @@
-name: azure-enterprise-app-java
-description: azure iac enterprise app PoC
-runtime: java
-config:
-  pulumi:tags:
-    value:
-      pulumi:template: java-gradle
-  azure-native:location: WestUS2

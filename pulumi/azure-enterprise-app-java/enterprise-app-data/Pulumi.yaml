@@ -1,0 +1,7 @@
+name: enterprise-app-data
+description: pulumi stack to hold and contain the data such as DB
+runtime: java
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: java-gradle
