@@ -89,9 +89,8 @@ Your new project is ready to go!
 To perform an initial deployment, run `pulumi up`
 ```
 
-
 # References
-- [Java pulumi API SDK](https://www.pulumi.com/docs/reference/pkg/java/)
 - [Pulumi & Java](https://www.pulumi.com/docs/iac/languages-sdks/java/)
+- [Java pulumi API SDK](https://www.pulumi.com/docs/reference/pkg/java/)
 - [Azure provider](https://www.pulumi.com/docs/iac/clouds/azure/)
 - [Azure Native: API Docs](https://www.pulumi.com/registry/packages/azure-native/api-docs/)
