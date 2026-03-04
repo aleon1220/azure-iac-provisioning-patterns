@@ -1,32 +1,21 @@
 package myproject;
 
 import com.pulumi.Pulumi;
-
 import com.pulumi.Context;
-import com.pulumi.azurenative.resources.ResourceGroup;
-import com.pulumi.azurenative.resources.ResourceGroupArgs;
+import com.pulumi.core.Output;
+import com.pulumi.resources.StackReference;
 
-import com.pulumi.azurenative.network.Subnet;
-import com.pulumi.azurenative.network.SubnetArgs;
-import com.pulumi.azurenative.network.NetworkInterface;
-import com.pulumi.azurenative.network.NetworkInterfaceArgs;
-import com.pulumi.azurenative.network.PublicIPAddress;
-import com.pulumi.azurenative.network.VirtualNetwork;
-import com.pulumi.azurenative.network.VirtualNetworkArgs;
-import com.pulumi.azurenative.network.inputs.NetworkInterfaceIPConfigurationArgs;
-import com.pulumi.azurenative.network.inputs.AddressSpaceArgs;
 import com.pulumi.azurenative.compute.VirtualMachine;
 import com.pulumi.azurenative.compute.VirtualMachineArgs;
-import com.pulumi.azurenative.compute.inputs.*;
-
-import com.pulumi.azurenative.sql.Server;
-import com.pulumi.azurenative.sql.ServerArgs;
-import com.pulumi.azurenative.sql.Database;
-import com.pulumi.azurenative.sql.DatabaseArgs;
-import com.pulumi.azurenative.sql.inputs.SkuArgs;
-import com.pulumi.core.Output;
-
-import java.util.List;
+import com.pulumi.azurenative.compute.inputs.HardwareProfileArgs;
+import com.pulumi.azurenative.compute.inputs.NetworkProfileArgs;
+import com.pulumi.azurenative.compute.inputs.OSProfileArgs;
+import com.pulumi.azurenative.compute.inputs.LinuxConfigurationArgs;
+import com.pulumi.azurenative.compute.inputs.StorageProfileArgs;
+import com.pulumi.azurenative.compute.inputs.ImageReferenceArgs;
+import com.pulumi.azurenative.compute.inputs.OSDiskArgs;
+import com.pulumi.azurenative.compute.inputs.NetworkInterfaceReferenceArgs;
+import com.pulumi.azurenative.compute.inputs.ManagedDiskParametersArgs;
 
 public class App {
         public static void main(String[] args) {
@@ -36,49 +25,26 @@ public class App {
                         // String locationName = config.require("location");
                         var resourceGroup = "anz-devops-sre-platform-engineering-research-dev";
                         var locationName = "WestUS2";
+                        var pulumiOrgProjectStack = "aleon1220/azure-enterprise-app-java/enterprise-app-networking";
+                        var networkStack = new StackReference(pulumiOrgProjectStack);
 
-                        // Create a virtual network
-                        var vnet = new VirtualNetwork("vnet", VirtualNetworkArgs.builder()
-                                        .resourceGroupName(resourceGroup).location(locationName)
-                                        .addressSpace(AddressSpaceArgs.builder()
-                                                        .addressPrefixes("10.0.0.0/16").build())
-                                        .build());
+                        Output<String> remoteNicId = networkStack.requireOutput("nic")
+                                        .applyValue(id -> (String) id);
 
-                        // Create a subnet
-                        var subnet = new Subnet("subnet",
-                                        SubnetArgs.builder().resourceGroupName(resourceGroup)
-                                                        .virtualNetworkName(vnet.name())
-                                                        .addressPrefix("10.0.1.0/24").build());
-
-                        // Create a network interface
-                        var nic = new NetworkInterface("nic", NetworkInterfaceArgs.builder()
-                                        .resourceGroupName(resourceGroup).location(locationName)
-                                        .ipConfigurations(
-                                                        List.of(NetworkInterfaceIPConfigurationArgs
-                                                                        .builder().name("ipconfig1")
-                                                                        .subnet(com.pulumi.azurenative.network.inputs.SubnetArgs
-                                                                                        .builder()
-                                                                                        .id(subnet.id())
-                                                                                        .build())
-                                                                        .privateIPAllocationMethod(
-                                                                                        "Dynamic")
-                                                                        .build()))
-                                        .build());
-
-                        // Create the virtual machine
+                        // https://www.pulumi.com/registry/packages/azure-native/api-docs/compute/virtualmachine
                         var vm = new VirtualMachine("vm", VirtualMachineArgs.builder()
                                         .resourceGroupName(resourceGroup).location(locationName)
                                         .networkProfile(NetworkProfileArgs.builder()
                                                         .networkInterfaces(
                                                                         NetworkInterfaceReferenceArgs
                                                                                         .builder()
-                                                                                        .id(nic.id())
+                                                                                        .id(remoteNicId)
                                                                                         .primary(true)
                                                                                         .build())
                                                         .build())
                                         .hardwareProfile(HardwareProfileArgs.builder()
                                                         .vmSize("Standard_B2s").build())
-                                        .osProfile(OSProfileArgs.builder().computerName("myvm")
+                                        .osProfile(OSProfileArgs.builder().computerName("vm-appian-poc")
                                                         .adminUsername("azureuser")
                                                         .adminPassword("Password1234!") // Use
                                                                                         // Pulumi
@@ -109,13 +75,13 @@ public class App {
                                                         .build())
                                         .build());
 
-                        // Export the VM's ID
-                        ctx.export("vmId", vm.id());
+                        // Exports & outputs
                         ctx.export("resourceGroupName", resourceGroup);
-
-                        // Exports section
-                        ctx.export("exampleOutput", Output.of("Example Output"));
+                        ctx.export("vmId", vm.id());
+                        ctx.export("output Location", Output.of(locationName));
+                        ctx.export("readme",
+                                        Output.of("To connect to the VM, use SSH"));
                         // ctx.export("vmPublicIP", publicIp.ipAddress());
                 });
-        }
-}
+        } // end of main
+} // end of class

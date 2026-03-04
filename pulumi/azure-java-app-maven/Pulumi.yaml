@@ -1,0 +1,7 @@
+name: azure-enterprise-app-java
+description: 2 tier app for proof of concept to be used in azure
+runtime: java
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: java
