@@ -28,12 +28,12 @@ java --version
 export PULUMI_ACCESS_TOKEN="https://app.pulumi.com/user/settings/tokens?filter=active"
 ```
 
-- go to directory containing to code and validate
+- go to directory containing the code validate the config
 ```shell
-pulumi preview
+pulumi config
 ```
 
-- once ready
+- create the infra. By default it does a `pulumi preview`
 ```shell
 pulumi up
 ```

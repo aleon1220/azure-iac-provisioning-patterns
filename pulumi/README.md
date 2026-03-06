@@ -86,7 +86,8 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 Your new project is ready to go! 
 
-To perform an initial deployment, run `pulumi up`
+To perform an initial deployment
+run `pulumi up`
 ```
 
 # References
@@ -94,3 +95,5 @@ To perform an initial deployment, run `pulumi up`
 - [Java pulumi API SDK](https://www.pulumi.com/docs/reference/pkg/java/)
 - [Azure provider](https://www.pulumi.com/docs/iac/clouds/azure/)
 - [Azure Native: API Docs](https://www.pulumi.com/registry/packages/azure-native/api-docs/)
+- [blog Stack READMEs in Pulumi](https://www.pulumi.com/blog/stack-readme/)
+- [using stack Readme](https://www.pulumi.com/docs/deployments/projects-and-stacks/#stack-readme)
