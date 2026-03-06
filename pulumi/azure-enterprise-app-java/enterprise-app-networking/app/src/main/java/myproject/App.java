@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.pulumi.Pulumi;
 import com.pulumi.Context;
-
 import com.pulumi.azurenative.network.Subnet;
 import com.pulumi.azurenative.network.SubnetArgs;
 import com.pulumi.azurenative.network.NetworkInterface;
@@ -49,10 +48,10 @@ public class App {
                                         .build());
 
                         // Export outputs
-                        ctx.export("output vnet name", vnet.name());
+                        ctx.export("output virtual network", vnet.name());
                         ctx.export("output Subnet Name", subnet.name());
                         ctx.export("output Subnet Address Prefix", subnet.addressPrefix());
-                        ctx.export("output NIC Network Interface Card name", nic.name());
+                        ctx.export("output NIC Network Interface Card", nic.name());
                         ctx.export("nic", nic.id());
                 });
         } // end of main
