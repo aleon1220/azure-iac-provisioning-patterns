@@ -4,6 +4,8 @@ import com.pulumi.Pulumi;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.nio.file.FileSystemException;
+
 import java.nio.file.Files;
 
 import com.pulumi.Config;
@@ -59,15 +61,14 @@ public class App {
                                 ctx.export("sqlServerFqdn", sqlServer.fullyQualifiedDomainName());
                                 ctx.export("sqlDatabaseName", sqlDatabase.name());
                                 // Connection string (without password for security)
-                                ctx.export("generic SQLConnectionString", Output
+                                ctx.export("baseSQLConnectionString", Output
                                                 .all(sqlServer.fullyQualifiedDomainName(), sqlDatabase.name())
                                                 .applyValue(values -> String.format(
-                                                                "Server=tcp:%s,1433;Database=%s;Encrypt=True;TrustServerCertificate=False;",
+                                                                "Server=tcp:%s,1433;Database=%s;",
                                                                 values.get(0), values.get(1))));
                         } catch (IOException e) {
                                 throw new RuntimeException(e);
                         }
-
                 });
         } // end of main
 } // end of class

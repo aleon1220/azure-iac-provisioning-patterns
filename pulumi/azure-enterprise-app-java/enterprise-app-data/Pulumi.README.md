@@ -1,5 +1,5 @@
 # Azure SQL Server and Database Provisioning (Java)
-
+connect with ${outputs.baseSQLConnectionString}Encrypt=True;TrustServerCertificate=False;
 This Pulumi stack provisions a logical Azure SQL Server and an associated Azure SQL Database using the `pulumi-azure-native` provider in Java. 
 
 🔗 **Repository:** [Azure Infrastructure as Code Provisioning Patterns - Enterprise App Java](https://github.com/aleon1220/azure-iac-provisioning-patterns/tree/main/pulumi/azure-enterprise-app-java)
