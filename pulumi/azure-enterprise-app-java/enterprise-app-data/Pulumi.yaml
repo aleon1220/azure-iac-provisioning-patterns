@@ -5,3 +5,6 @@ config:
   pulumi:tags:
     value:
       pulumi:template: java-gradle
+      purpose: azure monitoring test
+      owner: aleon1220
+      goal: azure certified skills

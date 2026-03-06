@@ -1,9 +1,6 @@
 config:
   azure-enterprise-app-java:resourceGroupName: anz-devops-sre-platform-engineering-research-dev
   azure-native:location: westus
-  enterprise-app-data:sqlAdminUsername: sqladmin
-  enterprise-app-data:sqlAdminPassword:
-    secure: AAABADSwTzbP9XyaSaFtTXWqTBgiWvbOIbBGx47n+nZEvMsgSpi9CCeRecKhRRc1+4g=
   azure-enterprise-app-java:sqlAdminUsername: ale
   azure-enterprise-app-java:sqlAdminPassword:
-    secure: AAABAL7tWnXfJDjveevnTyQucfcr6s9SUtVhCTBLs/kbPf8ixD5E1MbYloBIdntWCGf4jw==
+    secure: AAABADLAokDi3nc8p5lE+4H+CkMqPL8HpVl1v5F9aG/gGrvec5/29yo23Ef3SGEsbOsN7w==
