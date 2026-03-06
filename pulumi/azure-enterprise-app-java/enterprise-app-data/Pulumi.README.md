@@ -1,8 +1,11 @@
 # Azure SQL Server and Database Provisioning (Java)
-connect with ${outputs.baseSQLConnectionString}Encrypt=True;TrustServerCertificate=False;
+
+connect with DB String below
+> ${outputs.baseSQLConnectionString}Encrypt=True;TrustServerCertificate=False;
+
 This Pulumi stack provisions a logical Azure SQL Server and an associated Azure SQL Database using the `pulumi-azure-native` provider in Java. 
 
-🔗 **Repository:** [Azure Infrastructure as Code Provisioning Patterns - Enterprise App Java](https://github.com/aleon1220/azure-iac-provisioning-patterns/tree/main/pulumi/azure-enterprise-app-java)
+**git Repository:** [Azure Infrastructure as Code Provisioning Patterns - Enterprise App Java](https://github.com/aleon1220/azure-iac-provisioning-patterns/tree/main/pulumi/azure-enterprise-app-java)
 
 ## Overview
 
@@ -12,7 +15,7 @@ The stack defines the infrastructure required to host a relational database in A
 
 These resources are deployed to the `WestUS2` region in the `anz-devops-sre-platform-engineering-research-dev` resource group.
 
-## Prerequisites
+## Prerequisites 🔗
 
 Before running this Pulumi stack, ensure you have the following tools installed and configured:
 * [Pulumi CLI](https://www.pulumi.com/docs/install/)
@@ -20,9 +23,9 @@ Before running this Pulumi stack, ensure you have the following tools installed 
 * Apache Maven or Gradle (depending on your project setup)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (authenticated via `az login`)
 
-## Configuration
+## Configuration in Pulumi
 
-This stack requires some configuration variables to be set before deployment. Specifically, it needs the administrator credentials for the SQL Server.
+This stack requires some configuration variables to be set before deployment. Needs the administrator credentials for the SQL Server.
 
 Set these values using the Pulumi CLI:
 
