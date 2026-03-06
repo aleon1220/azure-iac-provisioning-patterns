@@ -1,4 +1,4 @@
-name: enterprise-app-data
+name:  azure-enterprise-app-java
 description: pulumi stack to hold and contain the data such as DB
 runtime: java
 config:
