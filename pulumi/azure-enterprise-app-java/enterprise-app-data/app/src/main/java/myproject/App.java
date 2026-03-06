@@ -1,6 +1,11 @@
 package myproject;
 
 import com.pulumi.Pulumi;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import com.pulumi.Config;
 import com.pulumi.core.Output;
 
@@ -16,6 +21,7 @@ public class App {
                         Config config = null;
                         var resourceGroup = "anz-devops-sre-platform-engineering-research-dev";
                         var locationName = "WestUS2";
+
                         // SQL Server configuration - use secrets for credentials
                         var sqlAdminUsername = ctx.config().require("sqlAdminUsername");
                         var sqlAdminPassword = ctx.config().requireSecret("sqlAdminPassword");
@@ -39,24 +45,29 @@ public class App {
                                         .location(locationName)
                                         .sku(SkuArgs.builder()
                                                         .name("Basic") // Options: Basic, S0, S1, P1, etc.
-                                                        .tier("Basic") // Options: Basic, Standard, Premium, GeneralPurpose
+                                                        .tier("Basic") // Options: Basic, Standard, Premium,
+                                                                       // GeneralPurpose
                                                         .build())
                                         .requestedBackupStorageRedundancy("Local") // Options: Local, Zone, Geo
                                         .build());
 
                         // Export outputs
-                        ctx.export("sqlServerName", sqlServer.name());
-                        ctx.export("sqlServerFqdn", sqlServer.fullyQualifiedDomainName());
-                        ctx.export("sqlDatabaseName", sqlDatabase.name());
+                        try {
+                                var readme = Files.readString(Paths.get("./Pulumi.README.md"));
+                                ctx.export("readme", Output.of(readme));
+                                ctx.export("sqlServerName", sqlServer.name());
+                                ctx.export("sqlServerFqdn", sqlServer.fullyQualifiedDomainName());
+                                ctx.export("sqlDatabaseName", sqlDatabase.name());
+                                // Connection string (without password for security)
+                                ctx.export("generic SQLConnectionString", Output
+                                                .all(sqlServer.fullyQualifiedDomainName(), sqlDatabase.name())
+                                                .applyValue(values -> String.format(
+                                                                "Server=tcp:%s,1433;Database=%s;Encrypt=True;TrustServerCertificate=False;",
+                                                                values.get(0), values.get(1))));
+                        } catch (IOException e) {
+                                throw new RuntimeException(e);
+                        }
 
-                        // Connection string (without password for security)
-                        ctx.export("generic SQLConnectionString", Output
-                                        .all(sqlServer.fullyQualifiedDomainName(), sqlDatabase.name())
-                                        .applyValue(values -> String.format(
-                                                        "Server=tcp:%s,1433;Database=%s;Encrypt=True;TrustServerCertificate=False;",
-                                                        values.get(0), values.get(1))));
-
-                        ctx.export("readme", Output.of("README.md"));
                 });
         } // end of main
 } // end of class
