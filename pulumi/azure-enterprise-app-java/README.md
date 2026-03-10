@@ -53,3 +53,12 @@ pulumi up
     .sku("22_04-lts")
     .version("latest")
 ```
+
+### pulumi commands
+```shell
+pulumi stack ls
+pulumi stack export
+pulumi whoami -v
+pulumi login --cloud-url="s3://pulumi-state"
+pulumi login azblob://statestorage"
+```
