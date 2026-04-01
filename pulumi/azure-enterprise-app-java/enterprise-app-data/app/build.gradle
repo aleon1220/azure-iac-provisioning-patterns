@@ -20,3 +20,7 @@ application {
             ? project.getProperty("mainClass")
             : 'myproject.App'
 }
+
+tasks.named('run') {
+    workingDir = rootProject.projectDir
+}

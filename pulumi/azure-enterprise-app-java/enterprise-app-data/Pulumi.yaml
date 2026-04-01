@@ -1,7 +1,10 @@
-name: enterprise-app-data
+name:  azure-enterprise-app-java
 description: pulumi stack to hold and contain the data such as DB
 runtime: java
 config:
   pulumi:tags:
     value:
       pulumi:template: java-gradle
+      purpose: azure monitoring test
+      owner: aleon1220
+      goal: azure certified skills
