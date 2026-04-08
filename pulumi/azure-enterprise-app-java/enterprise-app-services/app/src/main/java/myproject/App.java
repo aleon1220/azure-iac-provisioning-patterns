@@ -1,7 +1,6 @@
 package myproject;
 
 import com.pulumi.Pulumi;
-import com.pulumi.Context;
 import com.pulumi.core.Output;
 import com.pulumi.resources.StackReference;
 

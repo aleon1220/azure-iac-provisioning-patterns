@@ -13,6 +13,7 @@ import com.pulumi.azurenative.network.VirtualNetworkArgs;
 import com.pulumi.azurenative.network.inputs.NetworkInterfaceIPConfigurationArgs;
 import com.pulumi.azurenative.network.inputs.AddressSpaceArgs;
 
+@SuppressWarnings("unused")
 public class App {
         public static void main(String[] args) {
                 Pulumi.run(ctx -> {
