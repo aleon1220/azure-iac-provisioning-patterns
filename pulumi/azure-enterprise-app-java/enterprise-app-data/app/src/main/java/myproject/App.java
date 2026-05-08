@@ -4,7 +4,6 @@ import com.pulumi.Pulumi;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.nio.file.FileSystemException;
 
 import java.nio.file.Files;
 
@@ -20,9 +19,10 @@ import com.pulumi.azurenative.sql.inputs.SkuArgs;
 public class App {
         public static void main(String[] args) {
                 Pulumi.run(ctx -> {
-                        Config config = null;
                         var resourceGroup = "anz-devops-sre-platform-engineering-research-dev";
                         var locationName = "WestUS2";
+                        var config = ctx.config();
+                        var region = config.get("region");
 
                         // SQL Server configuration - use secrets for credentials
                         var sqlAdminUsername = ctx.config().require("sqlAdminUsername");
@@ -57,6 +57,7 @@ public class App {
                         try {
                                 var readme = Files.readString(Paths.get("./Pulumi.README.md"));
                                 ctx.export("readme", Output.of(readme));
+                                // SQL Server and Database details
                                 ctx.export("sqlServerName", sqlServer.name());
                                 ctx.export("sqlServerFqdn", sqlServer.fullyQualifiedDomainName());
                                 ctx.export("sqlDatabaseName", sqlDatabase.name());
@@ -66,6 +67,7 @@ public class App {
                                                 .applyValue(values -> String.format(
                                                                 "Server=tcp:%s,1433;Database=%s;",
                                                                 values.get(0), values.get(1))));
+                                ctx.export("Region", Output.of(region));
                         } catch (IOException e) {
                                 throw new RuntimeException(e);
                         }
