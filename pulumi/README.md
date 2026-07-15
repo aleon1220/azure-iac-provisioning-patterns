@@ -1,6 +1,25 @@
 # Pulumi
 
-- [install pulumi](https://www.pulumi.com/docs/get-started/download-install/) in azure cloudshell 
+* Flow of using the pulumi stack deployment
+
+```mermaid
+architecture-beta
+    %% Define the services and groups
+    service user(fa-user)[User]
+    service linux(logos:linux-tux)[Linux or WSL]
+    service pulumi(logos:pulumi)[Pulumi]
+    
+    group azure(logos:azure)[Azure Account]
+    service aks(logos:kubernetes)[AKS Cluster] in azure
+    
+    %% Define the directional connections (L=Left, R=Right)
+    user:R -- L:linux
+    linux:R -- L:pulumi
+    pulumi:R -- L:aks
+```
+
+- [install pulumi](https://www.pulumi.com/docs/get-started/download-install/) in azure cloudshell
+
 ```bash
 curl -fsSL https://get.pulumi.com | sh
 ```
@@ -11,7 +30,7 @@ curl -fsSL https://get.pulumi.com | sh
 
 ## set up of the pulumi structure
 - preferred sets a gradle app stack
-- 
+
 ```bash
 pulumi new java-gradle
 
